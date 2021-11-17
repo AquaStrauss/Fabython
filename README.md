@@ -4,7 +4,7 @@ Crypto Bot
 
 This bot use CoinGecko for their API to call the price of token :
 - $price 'api-id'
-- 
+
 or different information :
 - $coin 'api-id' :
   - Current Price
