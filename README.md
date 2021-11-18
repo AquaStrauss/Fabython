@@ -17,3 +17,5 @@ or different information :
 And it can calcute the rewards from an APY or APR via :
 - $apy 'apy' 'bag value'(Optional)
 - $apr 'apr' 'bag value'(Optional).
+
+Think to modify the config file to add the api key of Discord.
