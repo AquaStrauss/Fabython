@@ -9,7 +9,7 @@ class Rewards(cmd.Cog, name="Compounding Rewards "):
         self.client=bot
 
     #APYMATH
-    @cmd.command(brief="Math the rewards from APY.")
+    @cmd.command(brief="Calculate the rewards from APY.")
     async def apy(self, ctx, apy:float, amount:float=None):
 
         if amount:
@@ -64,7 +64,7 @@ class Rewards(cmd.Cog, name="Compounding Rewards "):
 
 
     #APRMATH
-    @cmd.command(brief="Math the rewards from APR.")
+    @cmd.command(brief="Calculate the rewards from APR.")
     async def apr(self, ctx, apr:float, amount:float=None):
 
         if amount:
