@@ -14,7 +14,11 @@ class CoinInformation(cmd.Cog, name="Token Information "):
     @cmd.command(brief="Give information about a coin from CoinGecko.")
     async def coin(self, ctx, apiid:str):
         coinInfo=gecko.get_coin_by_id(id=apiid)
-        embed=discord.Embed(title=apiid.upper())
+
+        urlHomepage=coinInfo['links']['homepage'][0]
+        urlCommunity=coinInfo['links']['chat_url'][0]
+
+        embed=discord.Embed(title=apiid.upper(), url=urlHomepage)
         embed.set_thumbnail(url=coinInfo['image']['thumb'])
 
         embed.add_field(name="Rank :", value=f"`{coinInfo['market_cap_rank']}`", inline=True)
@@ -31,9 +35,9 @@ class CoinInformation(cmd.Cog, name="Token Information "):
         embed.add_field(name="Volume :", value=f"`{coinInfo['market_data']['total_volume']['usd']}$`", inline=True)
 
         if coinInfo['links']['homepage'][0]:
-            embed.add_field(name="Website :", value=f"`{coinInfo['links']['homepage'][0]}`", inline=False)
+            embed.add_field(name="Website :", value=urlHomepage, inline=False)
         if coinInfo['links']['chat_url'][0]:
-            embed.add_field(name="T'Chat :", value=f"`{coinInfo['links']['chat_url'][0]}`", inline=False)
+            embed.add_field(name="Community :", value=urlCommunity, inline=False)
 
         #embed.set_footer(text=f"{coinInfo['asset_platform_id']} - {coinInfo['contract_address']}")
 
@@ -44,7 +48,7 @@ class CoinInformation(cmd.Cog, name="Token Information "):
     async def price(self, ctx, apiid:str):
         priceData=gecko.get_price(ids=apiid, vs_currencies="usd,eur")
         coinInfo=gecko.get_coin_by_id(id=apiid)
-        embed=discord.Embed(title=f"Price of `{apiid.upper()}` :", description=f"**`{priceData[apiid]['usd']}$`\n`{priceData[apiid]['eur']}€`**")
+        embed=discord.Embed(title=f"Price of {apiid.upper()} :", url=coinInfo['links']['homepage'][0], description=f"**{priceData[apiid]['usd']}$ - {priceData[apiid]['eur']}€**")
         embed.set_thumbnail(url=coinInfo['image']['large'])
         await ctx.send(embed=embed)
 
